@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mảng 2 chiều</title>
+    <style>
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Nhập số hàng và cột của mảng 2 chiều</h2>
+    <label for="numRows">Số hàng:</label>
+    <input type="number" id="numRows">
+
+    <label for="numColumns">Số cột:</label>
+    <input type="number" id="numColumns">
+
+    <button onclick="generateArrayInputs('arrayInputs1')">Tạo mảng 1</button>
+    <button onclick="generateArrayInputs('arrayInputs2')">Tạo mảng 2</button>
+
+    <br>
+    <br>
+
+    <div id="arrayInputs1"></div>
+    <div id="arrayInputs2"></div>
+
+
+    <br>
+    <br>
+
+    <button onclick="displayArray('output1', 'arrayInputs1')">Hiển thị mảng1</button>
+    <button onclick="displayArray('output2', 'arrayInputs2')">Hiển thị mảng2</button>
+    <button onclick="displaySum()">Hiển thị tổng</button>
+
+    <div id="output1"></div>
+    <div id="output2"></div>
+    <div id="outputsum"></div>
+
+
+
+    <script>
+        function generateArrayInputs(idElement) {
+            arrayInputs = document.getElementById(idElement);
+            const numRows = parseInt(document.getElementById('numRows').value);
+            const numColumns = parseInt(document.getElementById('numColumns').value);
+
+            let arrayInputsHTML = 'Mảng 1<br>';
+            for (let i = 0; i < numRows; i++) {
+                for (let j = 0; j < numColumns; j++) {
+                    arrayInputsHTML += `<input type="number" id="${arrayInputs.id}-input-${i}-${j}" placeholder="${i + 1},${j + 1}"> `;
+                }
+                arrayInputsHTML += '<br>';
+            }
+
+            arrayInputs.innerHTML = arrayInputsHTML;
+        }
+
+        function displayArray(idOutput, idInput) {
+            const numRows = parseInt(document.getElementById('numRows').value);
+            const numColumns = parseInt(document.getElementById('numColumns').value);
+
+            let outputHTML = '<h2>Kết quả mảng:</h2><table>';
+            for (let i = 0; i < numRows; i++) {
+                outputHTML += '<tr>';
+                for (let j = 0; j < numColumns; j++) {
+                    const value = document.getElementById(`${idInput}-input-${i}-${j}`).value;
+                    outputHTML += `<td>${value}</td>`;
+                }
+                outputHTML += '</tr>';
+            }
+            outputHTML += '</table>';
+
+            document.getElementById(idOutput).innerHTML = outputHTML;
+
+
+        }
+        function displaySum(ar1, ar2) {
+            if(ar1.length != ar2.length && ar1[0].length != ar2[0].length){
+                throw new Error("Hai mảng không cùng kích thước!");
+            }
+            var sum = [];
+            for (let i = 0; i < ar1.length; i++) {
+                sum[i]  = []
+                for (let j = 0; j < ar2.length; j++) {
+                    sum[i][j] = ar1[i][j] + ar2[i][j];
+                }
+            }
+            return sum;
+        }
+        var ar1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+        var ar2 = [[9, 8, 7], [6, 5, 4], [3, 2, 1]]
+        const sum = displaySum(ar1, ar2)
+        console.log(sum)
+    </script>
+</body>
+
+</html>
