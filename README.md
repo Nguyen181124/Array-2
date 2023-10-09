@@ -7,6 +7,7 @@
 1. Hiển thi mảng vừa nhập ra màn hình
 1. Tìm tổng của 2 ma trận vào in ra màn hình
 
+link bài: https://nguyen181124.github.io/array-2/
 ## Được viết bằng:
 - HTMl
 - Javacscript
