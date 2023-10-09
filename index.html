@@ -80,23 +80,46 @@
 
 
         }
-        function displaySum(ar1, ar2) {
-            if(ar1.length != ar2.length && ar1[0].length != ar2[0].length){
+        function displaySum() {
+            const numRows = parseInt(document.getElementById('numRows').value);
+            const numColumns = parseInt(document.getElementById('numColumns').value);
+
+            let ar1 = [];
+            let ar2 = [];
+
+            for (let i = 0; i < numRows; i++) {
+                ar1[i] = [];
+                ar2[i] = [];
+                for (let j = 0; j < numColumns; j++) {
+                    ar1[i][j] = parseInt(document.getElementById(`arrayInputs1-input-${i}-${j}`).value);
+                    ar2[i][j] = parseInt(document.getElementById(`arrayInputs2-input-${i}-${j}`).value);
+                }
+            }
+
+            if (ar1.length !== ar2.length || ar1[0].length !== ar2[0].length) {
                 throw new Error("Hai mảng không cùng kích thước!");
             }
-            var sum = [];
+
+            let sum = [];
             for (let i = 0; i < ar1.length; i++) {
-                sum[i]  = []
-                for (let j = 0; j < ar2.length; j++) {
+                sum[i] = [];
+                for (let j = 0; j < ar1[0].length; j++) {
                     sum[i][j] = ar1[i][j] + ar2[i][j];
                 }
             }
-            return sum;
+
+            let outputHTML = '<h2>Tổng hai mảng:</h2><table>';
+            for (let i = 0; i < sum.length; i++) {
+                outputHTML += '<tr>';
+                for (let j = 0; j < sum[0].length; j++) {
+                    outputHTML += `<td>${sum[i][j]}</td>`;
+                }
+                outputHTML += '</tr>';
+            }
+            outputHTML += '</table>';
+
+            document.getElementById('outputsum').innerHTML = outputHTML;
         }
-        var ar1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-        var ar2 = [[9, 8, 7], [6, 5, 4], [3, 2, 1]]
-        const sum = displaySum(ar1, ar2)
-        console.log(sum)
     </script>
 </body>
 
